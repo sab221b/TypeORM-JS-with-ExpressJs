@@ -24,9 +24,6 @@ module.exports = new EntitySchema({
         },
         dob: {
             type: "varchar"
-        },
-        mobile: {
-            type: "double"
         }
     }
 });
