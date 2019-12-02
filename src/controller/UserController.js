@@ -17,6 +17,8 @@ const createUser = (req, res) => {
                         }).catch((err) => {
                             res.status(400).send('error creating user', err);
                         })
+                } else {
+                    res.status(400).send({'message': 'missing required fields'});
                 }
             }
         }).catch((err) => res.status(400).send('error creating user', err));
