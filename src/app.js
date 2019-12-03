@@ -6,6 +6,13 @@ const routes = require('./routes/index');
 app.use(bodyParser.json());
 const PORT = parseInt(process.env.PORT, 10) || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
+var hbs = require('express-hbs');
+// Use `.hbs` for extensions and find partials in `views/partials`.
+app.engine('hbs', hbs.express4({
+  partialsDir: __dirname + '/views/partials'
+}));
+app.set('view engine', 'hbs');
+app.set('views', __dirname + '/views');
 
 typeorm.createConnection({
     type: "mysql",
@@ -13,7 +20,7 @@ typeorm.createConnection({
     port: 3306,
     username: "root",
     password: "mysql",
-    database: "mydb",
+    database: "sampleDB",
     synchronize: true,
     logging: false,
     entities: [
