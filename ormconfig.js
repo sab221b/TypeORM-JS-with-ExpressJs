@@ -8,13 +8,13 @@ module.exports = {
    synchronize: true,
    logging: false,
    entities: [
-      'src/entity/**/*.js'
+      'src/entities/**/*.js'
    ],
    migrations: [
       'src/migration/**/*.js'
    ],
-   seeds: ['src/database/seeds/**/*.seed.ts'],
-   factories: ['src/database/factories/**/*.factory.ts'],
+   seeds: ['src/seeds/**/*.seed.ts'],
+   factories: ['src/factories/**/*.factory.ts'],
    subscribers: [
       'src/subscriber/**/*.js'
    ],
