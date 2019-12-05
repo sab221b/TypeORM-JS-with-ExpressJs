@@ -4,6 +4,7 @@ const typeorm = require("typeorm");
 var bodyParser = require('body-parser');
 const routes = require('./routes/index');
 app.use(bodyParser.json());
+const config = require('../ormconfig')
 const PORT = parseInt(process.env.PORT, 10) || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 var hbs = require('express-hbs');
@@ -14,19 +15,7 @@ app.engine('hbs', hbs.express4({
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 
-typeorm.createConnection({
-    type: "mysql",
-    host: "localhost",
-    port: 3306,
-    username: "root",
-    password: "mysql",
-    database: "mydb",
-    synchronize: true,
-    logging: false,
-    entities: [
-        require("./entity/UserSchema"),
-    ]
-}).then((connection) => {
+typeorm.createConnection(config).then((connection) => {
     console.log('connection success', connection.isConnected);
     routes.UserRoutes.forEach(route => {
         app[route.method](route.path, (req, res, next) => {

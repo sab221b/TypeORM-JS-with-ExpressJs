@@ -1,5 +1,5 @@
 const typeorm = require("typeorm");
-const User = require("../entity/UserSchema");
+const User = require("../entities/UserSchema");
 
 const createUser = (req, res) => {
     const userRepository = typeorm.getManager().getRepository(User);

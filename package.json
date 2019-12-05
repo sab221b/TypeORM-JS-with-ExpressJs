@@ -5,10 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/app",
+    "start": "node src/app",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration-create": "typeorm migration:create -n User",
-    "migration": "tsc && ts-node ./node_modules/typeorm/cli.js migration:run"
+    "migration": "tsc && node ./node_modules/typeorm/cli.js migration:run",
+    "seed": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed"
   },
   "author": "Sabine@Rajesh",
   "license": "ISC",
@@ -21,5 +22,8 @@
     "nodemon": "^2.0.1",
     "typeorm": "^0.2.20",
     "typeorm-seeding": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/faker": "^4.1.8"
   }
 }
