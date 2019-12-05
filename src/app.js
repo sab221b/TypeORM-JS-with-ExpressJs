@@ -20,7 +20,7 @@ typeorm.createConnection({
     port: 3306,
     username: "root",
     password: "mysql",
-    database: "sampleDB",
+    database: "mydb",
     synchronize: true,
     logging: false,
     entities: [
