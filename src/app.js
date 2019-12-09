@@ -1,31 +1,23 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const typeorm = require("typeorm");
-var bodyParser = require('body-parser');
-const routes = require('./routes/index');
+const bodyParser = require('body-parser');
+const homeRoute = require('./routes/home/index');
+const authRoute = require('./routes/auth/index');
 app.use(bodyParser.json());
 const config = require('../ormconfig')
 const PORT = parseInt(process.env.PORT, 10) || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
-var hbs = require('express-hbs');
-// Use `.hbs` for extensions and find partials in `views/partials`.
-app.engine('hbs', hbs.express4({
-  partialsDir: __dirname + '/views/partials'
-}));
+const hbs = require('express-hbs');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.set('views', __dirname + '/views');
+app.use(express.static(path.join(__dirname, 'public')));
 
 typeorm.createConnection(config).then((connection) => {
     console.log('connection success', connection.isConnected);
-    routes.UserRoutes.forEach(route => {
-        app[route.method](route.path, (req, res, next) => {
-            route.action(req, res)
-        });
-    });
-
-    app.get('/', (req, res) => {
-        res.status(200).send({ message: 'Learn TypeORM(JS) with ExpressJs' })
-    })
+    app.use('/', homeRoute);
+    app.use('/auth', authRoute);
 
     app.listen(PORT, () => {
         console.log('Express server running at port: ' + PORT);
