@@ -13,8 +13,8 @@ module.exports = {
    migrations: [
       'src/migration/**/*.js'
    ],
-   seeds: ['src/seeds/**/*.seed.ts'],
-   factories: ['src/factories/**/*.factory.ts'],
+   seeds: ['src/seeds/**/*.ts'],
+   factories: ['src/factories/**/*.ts'],
    subscribers: [
       'src/subscriber/**/*.js'
    ],
